@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Hello</h1>
+<div id="new_come"></div>
+<script type="module">
+        var outer = document.createElement("div");
+        outer.classList.add("border");
+        outer.classList.add("border-secondary");
+        outer.classList.add("rounded");
+        outer.classList.add("m-3");
+        outer.classList.add("pl-4");
+        outer.classList.add("pt-2");
+        outer.classList.add("pb-2");
+        outer.style.backgroundColor='rgb(245, 245, 248)';
+    
+        var inner = document.createElement("div");
+        inner.style.display="flex";
+        inner.style.justifyContent="space-between";
+    
+        var first_name="{{user.first_name}}";
+        var last_name="lokhande";
+    
+        var htag=document.createElement("h3");
+        htag.innerHTML = first_name+" "+last_name;
+    
+        var hrtag=document.createElement("hr");
+        var innerp=document.createElement("p");
+        innerp.style.fontSize="0.9em";
+        var outerp=document.createElement("p");
+    
+
+                    
+                    
+                    innerp.innerHTML='v';
+                    inner.appendChild(htag);
+                    inner.appendChild(innerp);
+                    outer.appendChild(inner);
+                    outer.appendChild(hrtag);
+                    outerp.innerHTML='sdvdvs';
+                    outer.appendChild(outerp);
+                    var container = document.getElementById('new_come');
+                    container.insertBefore(outer, container.firstChild);
+        
+    </script>
+{% endblock %}

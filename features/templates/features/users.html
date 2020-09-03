@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            {% for useri in users %}
+            <div class="container">
+            <div class="row border border-secondary rounded mb-4 p-4" style="background-color:rgb(247, 244, 244)">
+                <div class="col-md-3">
+                    <img src={{useri.profile_pic.url}} class="rounded-circle" style="width:100%; height:auto">
+                </div>
+                <div class="col-md-9">
+                    <h1 class="display-4">{{useri.first_name}} {{useri.last_name}}</h1>
+                    <h3>{{useri.email}}</h3>
+                    <h5>{{useri.country}}</h5>
+                    <h5>{{useri.state}}</h5>
+                    <h5>{{useri.city}}</h5>
+                </div>
+            </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+
+
+{% endblock %}

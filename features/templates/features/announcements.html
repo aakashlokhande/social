@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            {% if exists == True %}
+                {% for announcement in announcements %}
+
+                <div class="border border-secondary rounded p-4 mb-4" style="background-color: rgb(245, 247, 247);">
+                    <h1 class="display-3 text-center">{{announcement.title}}</h1>
+                    <p style="font-size: 0.7em;">-{{announcement.date_posted}}</p>
+                    {{announcement.announcement|safe}}
+
+                </div>
+
+                {% endfor %}
+            {% else %}
+
+                <div class="display-4">
+                    <h1>There are no Announcements Yet</h1>
+                </div>
+
+            {% endif %}
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+
+{% endblock %}

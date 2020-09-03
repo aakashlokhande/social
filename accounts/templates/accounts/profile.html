@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="{{person.profile_pic.url}}" class="rounded-circle">
+        </div>
+        <div class="col-md-9">
+            <h1 class="display-3">{{person.first_name}} {{person.last_name}}</h1>
+            <h2> {{person.email}} </h2>
+        </div>
+    </div>
+    <hr>
+    <h1 class="display-4">Posts by {{person.first_name}} {{person.last_name}}</h1>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="row mt-4">
+                {% for post in posts %}
+                    <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                    <a href="{% url 'blog:post_detail' post.pk %}">
+                                      <img src="{{ post.thumbnail_img.url }}" class="card-img-top" alt="No image found for thumbanil" style="vertical-align: middle; border-style: none; width: 100%; height: 250px; object-fit: cover;">
+                                    </a>
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title"><a href="{% url 'blog:post_detail' post.pk %}">{{ post.title }}</a></h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">{{ post.author.first_name }} {{ post.author.last_name }}</h6>
+                                        <small class="card-text">{{ post.snippet|safe }}</small>
+                                        <a href="{% url 'blog:post_detail' post.pk %}" class="card-link mt-auto">Read More</a>
+                                      </div>
+                            </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+
+{% endblock %}

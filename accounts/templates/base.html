@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>SOCIAL</title>
+  </head>
+  <body>
+        <nav class="navbar navbar-expand-lg navbar-light mb-4" style="background-color: #ca8eec; position: -webkit-sticky;
+        position: sticky;top: 0; z-index:2">
+                <a class="navbar-brand" href="{% url 'blog:index' %}" style="font-size:2.5em;" class="ml-4">SOCIAL</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{% url 'blog:home' %}" style="font-size:1.5em;">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'accounts:red_profile' %}" style="font-size:1.5em;">Profile</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" style="font-size:1.5em;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        More
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'features:users' %}" style="font-size:1.5em;">Users</a>
+                        <a class="dropdown-item" href="#" style="font-size:1.5em;">Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'features:suggestions' %}" style="font-size:1.5em;">Suggestions</a>
+                      </div>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link disabled" href="#" style="font-size:1.5em;">Disabled</a>
+                    </li>
+                  </ul>
+                  <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" style="font-size:1.5em;">Search</button>
+                  </form>
+
+
+                  <ul class="navbar-nav">
+                      {% if user.is_authenticated %}
+                        <li class="nav-item active">
+                          <a class="nav-link text-danger" href="{% url 'accounts:logout' %}" style="font-size:1.3em;">LOGOUT</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url 'accounts:login' %}" style="font-size:1.3em;">LOGIN</a>
+                        </li>
+                        <li class="nav-item active">
+                          <a class="nav-link" href="{% url 'accounts:register' %}" style="font-size:1.3em;">REGISTER</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+              </nav>
+
+
+    {% block content %}
+
+    {% endblock %}
+
+
+
+    <!-- Footer -->
+<footer class="footer font-small stylish-color-dark pt-4 mt-4" style="background-color:rgb(29, 28, 28); color:beige;>
+
+        <!-- Footer Links -->
+        <div class="container text-center text-md-left">
+      
+          <!-- Grid row -->
+          <div class="row">
+      
+            <!-- Grid column -->
+            <div class="col-md-4 mx-auto">
+      
+              <!-- Content -->
+              <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
+              <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
+                consectetur
+                adipisicing elit.</p>
+      
+            </div>
+            <!-- Grid column -->
+      
+            <hr class="clearfix w-100 d-md-none">
+      
+            <!-- Grid column -->
+            <div class="col-md-2 mx-auto">
+      
+              <!-- Links -->
+              <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+      
+              <ul class="list-unstyled">
+                <li>
+                  <a href="#!">Link 1</a>
+                </li>
+                <li>
+                  <a href="#!">Link 2</a>
+                </li>
+
+                </li>
+              </ul>
+      
+            </div>
+            <!-- Grid column -->
+      
+            <hr class="clearfix w-100 d-md-none">
+      
+            <!-- Grid column -->
+            <div class="col-md-2 mx-auto">
+      
+              <!-- Links -->
+              <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+      
+              <ul class="list-unstyled">
+                <li>
+                  <a href="#!">Link 1</a>
+                </li>
+                <li>
+                  <a href="#!">Link 2</a>
+                </li>
+
+                </li>
+              </ul>
+      
+            </div>
+            <!-- Grid column -->
+      
+            <hr class="clearfix w-100 d-md-none">
+      
+            <!-- Grid column -->
+            <div class="col-md-2 mx-auto">
+      
+              <!-- Links -->
+              <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+      
+              <ul class="list-unstyled">
+                <li>
+                  <a href="#!">Link 1</a>
+                </li>
+                <li>
+                  <a href="#!">Link 2</a>
+                </li>
+            
+              </ul>
+      
+            </div>
+            <!-- Grid column -->
+      
+          </div>
+          <!-- Grid row -->
+      
+        </div>
+        <!-- Footer Links -->
+      
+        <hr>
+      
+        <!-- Call to action -->
+        <ul class="list-unstyled list-inline text-center py-2">
+          <li class="list-inline-item">
+            <h5 class="mb-1">Register for free</h5>
+          </li>
+          <li class="list-inline-item">
+            <a href="#!" class="btn btn-outline-primary btn-rounded">Sign up!</a>
+          </li>
+        </ul>
+        <!-- Call to action -->
+      
+        <hr>
+      
+       
+      </footer>
+      <!-- Footer -->
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

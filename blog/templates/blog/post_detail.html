@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load blog_filters %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+                <div class="text-center border border-secondary rounded p-3">
+                        <h1>{{post.title}}</h1>
+                        <img src="{{ post.thumbnail_img.url }}" style="max-width:400px;" class="mb-3">
+                        {{post.content|safe}}
+                    
+                </div>
+                <hr>
+                <form method='POST' enctype='multipart/form-data' id='likes_form'>
+                    
+                    {% csrf_token %}
+                        <fieldset >
+                            <input type="number" name="like_id" value="{{post.pk}}" style="display:none">
+                            <input type="email" name="like_email" value="{{user.email}}" style="display:none">
+                        </fieldset>
+                        <div>
+                            <button id="like" style="font-size:1.5em" class="btn btn-outline-primary" type="submit">Like</button> 
+                            <p id="like_msg">{{likes.liked_users|first_person}} {{likes.liked_users|leni}}</p>
+                        </div>
+                </form>
+
+
+                <hr>
+                <h1>Comments</h1>
+                <hr>
+                <div>
+                        <div>
+                                <form method='POST' enctype='multipart/form-data' class="mb-3" id='comment_form'>
+                                    <legend class='border-bottom mb-4 display-4'>Write a Comment</legend>
+                                    {% csrf_token %}
+                                        <fieldset >
+                                            {{form|crispy}}
+                                            <input type="number" name="id" value="{{post.pk}}" style="display:none">
+                                        </fieldset>
+                                        <div class="mt-3">
+                                            <button class='btn btn-outline-info' type ='submit'>Comment</button>
+                                        </div>
+                                </form>
+                        </div>
+                        <div id="new_come">
+                            </div>
+                        {% for comment in comments %}
+                            
+                            
+                            <div class="border border-secondary rounded m-3 pl-4 pt-2 pb-2" style="background-color:rgb(245, 245, 248);">
+                                <div style="display:flex; justify-content:space-between;">
+                                        <h3>{{comment.writer.first_name}} {{comment.writer.last_name}}</h3>
+                                        <p style="font-size:0.9em">- {{comment.date_posted}}</p>
+                                </div>    
+                                <hr>
+                                <p>{{comment.comment}}</p>
+                            </div>
+                        {% endfor %}
+                
+                </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+<script type="module">
+    var outer = document.createElement("div");
+    outer.classList.add("border");
+    outer.classList.add("border-secondary");
+    outer.classList.add("rounded");
+    outer.classList.add("m-3");
+    outer.classList.add("pl-4");
+    outer.classList.add("pt-2");
+    outer.classList.add("pb-2");
+    outer.style.backgroundColor='rgb(245, 245, 248)';
+
+    var inner = document.createElement("div");
+    inner.style.display="flex";
+    inner.style.justifyContent="space-between";
+
+    var first_name="{{user.first_name}}";
+    var last_name="{{user.last_name}}";
+    var email="{{user.email}}";
+    var id ="{{post.pk}}";
+
+    var htag=document.createElement("h3");
+    htag.innerHTML = first_name+" "+last_name;
+
+    var hrtag=document.createElement("hr");
+    var innerp=document.createElement("p");
+    innerp.style.fontSize="0.9em";
+    var outerp=document.createElement("p");
+
+	let comment_form=document.getElementById('comment_form');
+	comment_form.addEventListener('submit', function(event){
+		event.preventDefault();
+		fetch("{% url 'blog:create_comment' %}",{
+			method: "POST",
+			body : new FormData(comment_form)
+		}).then(res=>res.json())
+		.then((data)=>{
+			if(data.hasOwnProperty('error'))
+			{
+				comment_form.reset();
+			}
+			else
+			{
+                
+                var date_posted=data.date_posted;
+                var comment= data.comment;
+                innerp.innerHTML=date_posted;
+                inner.appendChild(htag);
+                inner.appendChild(innerp);
+                outer.appendChild(inner);
+                outer.appendChild(hrtag);
+                outerp.innerHTML=comment;
+                outer.appendChild(outerp);
+                var container = document.getElementById('new_come');
+                container.insertBefore(outer, container.firstChild);
+                comment_form.reset();
+			}
+		}).catch(err=>console.log(err))
+    })
+    let likes_form= document.getElementById('likes_form');
+    likes_form.addEventListener('submit', function(event){
+        event.preventDefault();
+        console.log('submitted');
+        fetch("{% url 'blog:like_post' %}",{
+            method:"POST",
+            body: new FormData(likes_form)
+        
+        }).then(res=>res.json())
+		.then((data)=>{
+			document.getElementById('like_msg').innerText=data.message
+		}).catch(err=>console.log(err))
+    })
+    
+</script>
+
+{% endblock %}
